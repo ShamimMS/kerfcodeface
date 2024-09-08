@@ -66,8 +66,20 @@ Route::middleware('doctor')->group(function () {
     Route::controller('ScheduleController')->name('schedule.')->prefix('schedule')->group(function () {
         Route::get('index', 'index')->name('index');
         Route::post('update', 'update')->name('update');
+       
+        
     });
+    
 
+    //Leave//
+    Route::controller('LeaveController')->name('leave.')->prefix('leave')->group(function () {
+        Route::get('index', 'index')->name('index');
+        // Route::post('update', 'update')->name('update');
+        Route::post('store', 'store')->name('store');
+        Route::post('destroy', 'destroy')->name('destroy');
+        
+    });
+    Route::delete('leave/{id}', 'LeaveController@destroy')->name('leave.destroy');
     //Appointments
     Route::controller('AppointmentController')->prefix('appointment')->name('appointment.')->group(function () {
         Route::get('booking', 'details')->name('booking');

@@ -60,6 +60,13 @@
                     </div>
                 </li>
 
+                <li class="sidebar-menu-item {{ menuActive('doctor.leave.index') }}">
+                    <a href="{{ route('doctor.leave.index') }}" class="nav-link ">
+                        <i class="menu-icon las la-user-plus "></i>
+                        <span class="menu-title">@lang('Manage Leaves')</span>
+                    </a>
+                </li>
+
                 <li class="sidebar-menu-item {{ menuActive('doctor.schedule.index') }}">
                     <a href="{{ route('doctor.schedule.index') }}" class="nav-link ">
                         <i class="menu-icon las la-calendar-check"></i>
