@@ -52,7 +52,7 @@ class DoctorController extends Controller
 
         if ($request->hasFile('image')) {
             try {
-                $doctor->image = fileUploader($request->image, getFilePath('doctorProfile'), getFileSize('doctorProfile'), $doctor->image);
+                $doctor->image = fileUploader($request->image, getFilePath('doctorProfile'), getFileSize('doctorProfile'), $doctor->image, false);
             } catch (\Exception $exp) {
                 $notify[] = ['error', 'Couldn\'t upload your image'];
                 return back()->withNotify($notify);

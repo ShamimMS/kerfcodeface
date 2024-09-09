@@ -168,25 +168,25 @@ h6 {
 
 h1 {
   font-size: 2.441em;
-  font-family: 'FSAlbert';
+  /* font-family: 'FSAlbert'; */
   font-weight: 700;
 }
 
 h2 {
   font-size: 30px;
-  font-family: 'FSAlbert';
+  /* font-family: 'FSAlbert'; */
   font-weight: 700;
 }
 
 h3 {
   font-size: 24px;
-  font-family: 'FSAlbert';
+  /* font-family: 'FSAlbert'; */
   font-weight: 700;
 }
 
 h4 {
   font-size: 20px;
-  font-family: 'FSAlbert';
+  /* font-family: 'FSAlbert'; */
   font-weight: 600;
 }
 
@@ -849,7 +849,7 @@ input::-moz-focus-inner {
   color: white !important;
   padding: 8px 35px;
   border-radius: 8px;
-  font-family: 'FSAlbert';
+  /* font-family: 'FSAlbert'; */
   font-size: 16px;
   font-weight: 500;
   z-index: 2;
@@ -876,7 +876,7 @@ input::-moz-focus-inner {
   background-color: #456597;
   padding: 8px 35px;
   border-radius: 8px;
-  font-family: 'FSAlbert';
+  /* font-family: 'FSAlbert'; */
   font-size: 16px;
   font-weight: 500;
   z-index: 2;
@@ -4597,3 +4597,34 @@ to {
 }
 
 
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
+
+@import 'https://cdn.jsdelivr.net/npm/@frontity/albert@1.0.0/dist/index.css';
+
+:root {
+  --primary-color: #3498db;
+}
+
+body {
+  font-family: 'FSAlbert', sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.button {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.custom-button {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

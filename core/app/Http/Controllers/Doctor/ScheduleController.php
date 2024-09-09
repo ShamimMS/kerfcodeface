@@ -40,18 +40,35 @@ class ScheduleController extends Controller
         } elseif ($request->slot_type == 2 && $request->duration > 0) {
             $startTime    = Carbon::parse($request->start_time);
             $endTime      = Carbon::parse($request->end_time);
+            
+            $start_time_evening = Carbon::parse($request->start_time_evening);
+            $end_time_evening = Carbon::parse($request->end_time_evening);
             $totalMinutes = $endTime->diffInMinutes($startTime);
             $totalSlot   = $totalMinutes / $request->duration;
+
+            $evetotalMinutes = $end_time_evening->diffInMinutes($start_time_evening);
+            $evetotalSlot   = $evetotalMinutes / $request->duration;
 
             $serialOrSlot = [];
             for ($i = 1; $i <= $totalSlot; $i++) {
                 array_push($serialOrSlot, date('h:i:a', strtotime($startTime)));
                 $startTime->addMinutes($request->duration);
             }
-            $doctor->serial_or_slot = $serialOrSlot;
+
+            $eveserialOrSlot = [];
+            for ($j = 1; $j <= $evetotalSlot; $j++) {
+                array_push($eveserialOrSlot, date('h:i:a', strtotime($start_time_evening)));
+                $start_time_evening->addMinutes($request->duration);
+            }
+
+            // $doctor->serial_or_slot = $serialOrSlot;
+            // $doctor->eve_slots = $eveserialOrSlot;
+            $doctor->serial_or_slot = array_merge($serialOrSlot, $eveserialOrSlot);
             $doctor->duration       = $request->duration;
             $doctor->start_time     = Carbon::parse($request->start_time)->format('h:i a');
             $doctor->end_time       = Carbon::parse($request->end_time)->format('h:i a');
+            $doctor->start_time_evening = Carbon::parse($request->start_time_evening)->format('h:i a');
+            $doctor->end_time_evening = Carbon::parse($request->end_time_evening)->format('h:i a');
         } else {
             $notify[] = ['error', 'Select the maximum serial or duration'];
             return back()->withNotify($notify);
@@ -64,3 +81,4 @@ class ScheduleController extends Controller
         return back()->withNotify($notify);
     }
 }
+//file to change

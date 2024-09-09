@@ -53,7 +53,7 @@
                                     <div class="image-upload">
                                         <div class="thumb">
                                             <div class="avatar-preview">
-                                                <div class="profilePicPreview" style="background-image: url({{ getImage(getFilePath('adminProfile').'/'.$admin->image,getFileSize('adminProfile')) }})">
+                                                <div class="profilePicPreview" style="background-image: url({{ getImage(getFilePath('adminProfile').'/'.$admin->image,getFileSize('adminProfile'),false) }})">
                                                     <button type="button" class="remove-image"><i class="fa fa-times"></i></button>
                                                 </div>
                                             </div>
