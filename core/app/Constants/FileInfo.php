@@ -65,7 +65,7 @@ class FileInfo
 
         $data['doctorProfile'] = [
             'path'      =>'assets/images/doctor',
-            'size'      =>'300x240',
+            'size'      =>'300x300',
         ];
         $data['assistantProfile'] = [
             'path'      =>'assets/images/assistant',

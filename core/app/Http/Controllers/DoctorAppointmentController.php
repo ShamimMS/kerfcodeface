@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Constants\Status;
 use App\Models\Department;
 use App\Models\Doctor;
+use App\Models\Leave;
 use App\Models\Location;
 use App\Traits\AppointmentManager;
 use Carbon\Carbon;
@@ -63,19 +64,38 @@ class DoctorAppointmentController extends Controller
     public function booking($id = 0)
     {
         $doctor = Doctor::findOrFail($id);
-
+        
+        $leaves = Leave::select('id', 'employee_id', 'start_date', 'end_date', 'reason')
+        ->where('employee_id', '=', $id)
+        ->get();
         if (!$doctor->status) {
             $notify[] = ['error', 'This doctor is inactive!'];
             return to_route('doctors.all')->withNotify($notify);
         }
+        // print_r($leaves);
+        foreach ($leaves as $key => $value) {
+            // echo $value;
+            $startDate = Carbon::parse($value->start_date);
+            $endDate = Carbon::parse($value->end_date);
 
+            $dates = [];
+
+            for ($date = $startDate; $date->lte($endDate); $date->addDay()) {
+                $dates[] = $date->format('Y-m-d');
+            }
+
+            // print_r($dates);
+        }
         $pageTitle = $doctor->name . ' - Booking';
         $availableDate = [];
         $date = Carbon::now();
         for ($i = 0; $i < $doctor->serial_day; $i++) {
-            array_push($availableDate, date('Y-m-d', strtotime($date)));
+            if (!in_array(date('Y-m-d', strtotime($date)), $dates)) {
+                array_push($availableDate, date('Y-m-d', strtotime($date)));
+            }  
             $date->addDays(1);
         }
+        // print_r($availableDate);
         return view($this->activeTemplate . 'booking',  compact('availableDate', 'doctor', 'pageTitle'));
     }
 }
